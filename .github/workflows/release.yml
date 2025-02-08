@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Clone wireit repository
+      - name: Clone wireit repository
         run: git clone https://github.com/google/wireit.git .
 
       - name: Create pnpm-workspace.yaml
