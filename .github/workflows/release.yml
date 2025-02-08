@@ -26,7 +26,7 @@ jobs:
 
       - name: Update package.json
         run: |
-          jq '.name = "@lilnasy/wireit" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
+          jq '.name = "wireit-bundled" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
 
       - name: Install dependencies
         run: pnpm install
