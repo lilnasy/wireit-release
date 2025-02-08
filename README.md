@@ -1,2 +1,1 @@
-# wireit-release
-A repository for creating and releasing the npm package 'wireit' with bundled dependencies
+This repository is empty. Any task executed on it should be considered a new capability and needs to be created.
