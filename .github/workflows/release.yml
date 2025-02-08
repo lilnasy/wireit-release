@@ -23,7 +23,7 @@ jobs:
 
       - name: Update package.json
         run: |
-          jq '.name = "ware-riba-xifa" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
+          jq '.name = "ware-riba-xifa" | .bundleDependencies = true | .repository.url = "https://github.com/lilnasy/wireit-release"' package.json > tmp.json && mv tmp.json package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
