@@ -32,4 +32,6 @@ jobs:
         run: pnpm install
 
       - name: Publish package
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm publish --no-git-checks --provenance .
