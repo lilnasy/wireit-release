@@ -21,12 +21,9 @@ jobs:
       - name: Clone wireit repository
         run: git clone https://github.com/google/wireit.git .
 
-      - name: Create .npmrc
-        run: echo node-linker=hoisted > .npmrc
-
       - name: Update package.json
         run: |
-          jq '.name = "b1c3d719e0fd" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
+          jq '.name = "ware-riba-xifa" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -37,10 +34,13 @@ jobs:
       - name: Create pnpm-workspace.yaml
         run: touch pnpm-workspace.yaml
 
+      - name: Create .npmrc
+        run: echo node-linker=hoisted > .npmrc
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Publish package
-        run: pnpm publish --no-git-checks --provenance --access public .
+        run: pnpm publish --no-git-checks --provenance --access public
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
