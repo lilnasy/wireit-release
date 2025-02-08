@@ -21,17 +21,12 @@ jobs:
       - name: Clone wireit repository
         run: git clone https://github.com/google/wireit.git .
 
-      - name: Create pnpm-workspace.yaml
-        run: touch pnpm-workspace.yaml
-
       - name: Create .npmrc
-        run: |
-          echo node-linker=hoisted > .npmrc
-          echo registry=https://registry.npmjs.org/ >> .npmrc
+        run: echo node-linker=hoisted > .npmrc
 
       - name: Update package.json
         run: |
-          jq '.name = "wireit-bundled" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
+          jq '.name = "b1c3d719e0fd" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -39,12 +34,13 @@ jobs:
           node-version: "lts/*"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Create pnpm-workspace.yaml
+        run: touch pnpm-workspace.yaml
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Publish package
         run: pnpm publish --no-git-checks --provenance --access public .
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
