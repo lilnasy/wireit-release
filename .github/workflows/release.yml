@@ -22,7 +22,9 @@ jobs:
         run: touch pnpm-workspace.yaml
 
       - name: Create .npmrc
-        run: echo node-linker=hoisted > .npmrc
+        run: |
+          echo node-linker=hoisted > .npmrc
+          echo registry=https://registry.npmjs.org/ >> .npmrc
 
       - name: Update package.json
         run: |
@@ -34,4 +36,4 @@ jobs:
       - name: Publish package
         run: pnpm publish --no-git-checks --provenance .
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
