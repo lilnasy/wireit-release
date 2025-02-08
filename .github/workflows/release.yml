@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Clone wireit repository
+        run: git clone https://github.com/google/wireit.git .
+
+      - name: Create pnpm-workspace.yaml
+        run: touch pnpm-workspace.yaml
+
+      - name: Create .npmrc
+        run: echo node-linker=hoisted > .npmrc
+
+      - name: Update package.json
+        run: |
+          jq '.name = "@lilnasy/wireit" | .bundleDependencies = true' package.json > tmp.json && mv tmp.json package.json
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish package
+        run: npm --no-git-checks --provenance publish .
